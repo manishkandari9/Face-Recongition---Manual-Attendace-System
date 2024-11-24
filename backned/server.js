@@ -1,6 +1,6 @@
 const express = require('express');
 const connectDB = require('./config/db');
-// const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoutes');
 // const attendanceRoutes = require('./routes/attendanceRoutes');
 // const assignmentRoutes = require("./routes/assignmentRoutes");
 // const studentRoutes = require('./routes/studentRoutes');
@@ -25,7 +25,7 @@ app.use(cors({
 app.use(express.json({ limit: "50mb" })); 
 
 // Add routes
-// app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 // app.use('/api/attendance', attendanceRoutes);
 // app.use('/api/assignments', assignmentRoutes);
 // app.use("/api", studentRoutes);
