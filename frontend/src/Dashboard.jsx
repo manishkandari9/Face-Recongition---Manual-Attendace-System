@@ -3,7 +3,6 @@ import {  Box,  Typography,  List,  ListItem,  ListItemIcon,  ListItemText,  Gri
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SearchIcon from '@mui/icons-material/Search';
 import ScannerIcon from '@mui/icons-material/Scanner';
-import Logo from './facee.jpg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
