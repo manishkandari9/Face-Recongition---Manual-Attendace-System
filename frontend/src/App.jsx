@@ -5,6 +5,8 @@ import Dashboard from './Dashboard';
 import Scan from './components/scan';
 import TeacherDashboard from './TeacherDashboard';
 import AssignmentManager from './AssignmentManager';
+import './App.css'; 
+import './index.css';
 
 
 function App() {
