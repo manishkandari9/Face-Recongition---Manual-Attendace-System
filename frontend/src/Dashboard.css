@@ -1,0 +1,155 @@
+/* body{
+  background: linear-gradient(to right, #000000, #0034);
+} */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .header {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem;
+    text-align: center;
+    height: 35px;
+  }
+  
+  .side-nav-bar {
+    background-color: #444;
+    color: #fff;
+    padding: 1rem;
+    width: 10%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+  }
+  
+  .heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 1rem;
+  }
+  
+  .nav a:hover {
+    background-color: #555;
+  }
+  
+  .main-content {
+    margin-left: 13rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0rem;
+  }
+  
+  .works-container {
+    display: grid;
+   grid-template-columns: repeat(4,1fr);
+   gap: 1rem;
+  }
+  
+  .work {
+    background-color: #f7f7f7;
+    padding: 1rem;
+    /* margin: 1rem; */
+    width: 15rem;
+    height: 8rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .work i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .work h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .work p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .container-box {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+  }
+  
+  .box {
+    background-color: #f7f7f7;
+    padding: 1rem;
+    margin: 1rem;
+    width: 30%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .boxs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .bx {
+    background-color: #f7f7f7;
+    padding: 1rem;
+    margin: 1rem;
+    width: 30%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bx h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
