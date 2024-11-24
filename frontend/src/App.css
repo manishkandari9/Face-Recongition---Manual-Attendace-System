@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 body {
   background: linear-gradient(to right, #000000, #331c4c);
 }
