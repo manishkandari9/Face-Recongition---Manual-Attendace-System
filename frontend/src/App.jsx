@@ -1,13 +1,14 @@
+// src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SignInSignUp from './SignInSignUp';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SignInSignUp from './SignInSignUp';  // Import other components
 import Dashboard from './Dashboard';
 import TeacherDashboard from './TeacherDashboard';
 import AssignmentManager from './AssignmentManager';
 import StudentDashboard from './StudentDashboard';
-import Scan from './components/scan';
-import './App.css'; 
-import './index.css';
+import Scan from './components/scan';  // Import Scan component
+import './App.css';  // App-level CSS (optional)
+import './index.css';  // Global CSS (optional)
 
 function App() {
   return (
@@ -25,4 +26,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;
