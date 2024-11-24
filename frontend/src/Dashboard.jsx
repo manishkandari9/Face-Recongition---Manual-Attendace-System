@@ -4,6 +4,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import SearchIcon from '@mui/icons-material/Search';
 import ScannerIcon from '@mui/icons-material/Scanner';
 import axios from 'axios';
+import Logo from './facee.jpg';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
