@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const faceAttendanceController = require("../controllers/faceAttendanceController");
+const faceAttendanceController = require("../controller/faceAttendanceController");
 
 router.post("/mark", faceAttendanceController.markAttendance);
 router.get("/records", faceAttendanceController.getAttendanceRecords);

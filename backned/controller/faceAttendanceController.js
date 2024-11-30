@@ -1,6 +1,7 @@
 const { FaceStudent } = require('../models/faceStudentModel'); // FaceStudent मॉडल इम्पोर्ट करें
 const { FaceAttendance } = require('../models/faceAttendanceModel'); // FaceAttendance मॉडल इम्पोर्ट करें
-const faceapi = require('face-api.js');  // face-api.js का उपयोग करें
+const faceapi = require('face-api.js');
+
 
 exports.markAttendance = async (req, res) => {
   try {
