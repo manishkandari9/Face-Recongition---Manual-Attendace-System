@@ -39,10 +39,6 @@ const Dashboard = () => {
     navigate('/scan');
   };
 
-  const handleLogoutClick = () => {
-    navigate('/');
-  };
-
   const handleTeacherDashboardClick = () => {
     navigate("/TeacherDashboard");
   };
@@ -58,6 +54,16 @@ const Dashboard = () => {
   const handlerefreshiconClick = () => {
     navigate("/dashboard");
   };
+
+  const handleLogoutClick = () => {
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (confirmLogout) {
+      localStorage.removeItem('authToken');
+      navigate('/'); // Redirect to login page
+    }
+  };
+
+  // Data fetching and logic for attendance goes here
   const [topAttendees, setTopAttendees] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [totalPresent, setTotalPresent] = useState(0);  
