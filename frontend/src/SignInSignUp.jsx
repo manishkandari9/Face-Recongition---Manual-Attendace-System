@@ -276,6 +276,8 @@ function SignInSignUp() {
       `}</style>
     </div>
   );
+
+  
 }
 
 export default SignInSignUp;
