@@ -34,6 +34,22 @@ app.use("/api", studentRoutes);
 // app.use("/api/students", faceStudentRoutes);
 // app.use("/api/attendance", faceAttendanceRoutes);
 
+pp.use(express.static(path.join(__dirname, 'build')));
+console.log('Serving static files from:', path.join(__dirname, 'build'));
+
+
+// Serve React app for all unmatched routes
+app.get('*', (req, res) => {
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'build', 'index.html'));
+      });
+
+});
+
+
+
+// Serve static files
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
