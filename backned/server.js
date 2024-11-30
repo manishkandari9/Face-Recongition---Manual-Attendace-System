@@ -18,8 +18,9 @@ connectDB();
 // Frontend URLs (development + production)
 const allowedOrigins = [
     'http://localhost:3000', // Local development URL
-    'https://your-vercel-project-name.vercel.app' // Vercel production URL
+    'https://face-recongition-manual-attendace-system.vercel.app', // Vercel production URL
 ];
+
 
 app.use(cors({
     origin: function (origin, callback) {
