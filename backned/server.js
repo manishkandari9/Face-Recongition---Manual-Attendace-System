@@ -13,11 +13,27 @@ const app = express();
 // Connect to the database
 connectDB();
 
+
+
+// Frontend URLs (development + production)
+const allowedOrigins = [
+    'http://localhost:3000', // Local development URL
+    'https://your-vercel-project-name.vercel.app' // Vercel production URL
+];
+
 app.use(cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    credentials: true 
+    origin: function (origin, callback) {
+        // Agar origin allowed URLs me se hai to allow karo
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('CORS not allowed'), false);
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true // Agar cookies ya sessions use ho rahe hain
 }));
+
 
 app.use(express.json({ limit: "50mb" })); 
 
