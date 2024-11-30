@@ -1,12 +1,12 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
-// const attendanceRoutes = require('./routes/attendanceRoutes');
-// const assignmentRoutes = require("./routes/assignmentRoutes");
-// const studentRoutes = require('./routes/studentRoutes');
+const attendanceRoutes = require('./routes/attendanceRoutes');
+const assignmentRoutes = require("./routes/assignmentRoutes");
+const studentRoutes = require('./routes/studentRoutes');
 
-// const faceStudentRoutes = require("./routes/faceStudentRoutes");
-// const faceAttendanceRoutes = require("./routes/faceAttendanceRoutes");
+const faceStudentRoutes = require("./routes/faceStudentRoutes");
+const faceAttendanceRoutes = require("./routes/faceAttendanceRoutes");
 const cors = require('cors'); // Import the CORS middleware
 require('dotenv').config();
 
@@ -26,13 +26,13 @@ app.use(express.json({ limit: "50mb" }));
 
 // Add routes
 app.use('/api/auth', authRoutes);
-// app.use('/api/attendance', attendanceRoutes);
-// app.use('/api/assignments', assignmentRoutes);
-// app.use("/api", studentRoutes);
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use("/api", studentRoutes);
 
 
-// app.use("/api/students", faceStudentRoutes);
-// app.use("/api/attendance", faceAttendanceRoutes);
+app.use("/api/students", faceStudentRoutes);
+app.use("/api/attendance", faceAttendanceRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
