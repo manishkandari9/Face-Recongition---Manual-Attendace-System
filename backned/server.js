@@ -4,6 +4,7 @@ const authRoutes = require('./routes/authRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const assignmentRoutes = require("./routes/assignmentRoutes");
 const studentRoutes = require('./routes/studentRoutes');
+const path = require('path');
 
 // const faceStudentRoutes = require("./routes/faceStudentRoutes");
 // const faceAttendanceRoutes = require("./routes/faceAttendanceRoutes");
@@ -33,6 +34,19 @@ app.use("/api", studentRoutes);
 
 // app.use("/api/students", faceStudentRoutes);
 // app.use("/api/attendance", faceAttendanceRoutes);
+
+
+
+
+//.................... code for deployment.................
+if(process.env.NODE_ENV === "production"){
+    const dirPath = path.resolve();
+    
+    app.use(express.static("./Frontend/dist"));
+    app.get("*",(req,res) =>{
+      res.sendFile(path.resolve(dirPath, "./frontend/dist", "index.html"));
+    })
+  }
 
 // Start the server
 const PORT = process.env.PORT || 3000;
