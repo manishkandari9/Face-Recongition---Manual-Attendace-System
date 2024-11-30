@@ -5,9 +5,6 @@ const attendanceRoutes = require('./routes/attendanceRoutes');
 const assignmentRoutes = require("./routes/assignmentRoutes");
 const studentRoutes = require('./routes/studentRoutes');
 const path = require('path');
-
-// const faceStudentRoutes = require("./routes/faceStudentRoutes");
-// const faceAttendanceRoutes = require("./routes/faceAttendanceRoutes");
 const cors = require('cors'); // Import the CORS middleware
 require('dotenv').config();
 
@@ -15,7 +12,6 @@ const app = express();
 
 // Connect to the database
 connectDB();
-
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -31,22 +27,17 @@ app.use('/api/attendance', attendanceRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use("/api", studentRoutes);
 
+app.get('/api/data', (req, res) => {
+    res.json({ message: "API is working" });
+});
 
-// app.use("/api/students", faceStudentRoutes);
-// app.use("/api/attendance", faceAttendanceRoutes);
+// Serve frontend build files
+app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
-
-
-
-//.................... code for deployment.................
-if(process.env.NODE_ENV === "production"){
-    const dirPath = path.resolve();
-    
-    app.use(express.static("./Frontend/dist"));
-    app.get("*",(req,res) =>{
-      res.sendFile(path.resolve(dirPath, "./frontend/dist", "index.html"));
-    })
-  }
+// Handle React Router's routes (Fallback to index.html)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
+});
 
 // Start the server
 const PORT = process.env.PORT || 3000;
