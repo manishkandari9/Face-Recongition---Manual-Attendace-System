@@ -1,5 +1,7 @@
+// User.js (model)
 const mongoose = require('mongoose');
 
+ 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -27,10 +29,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  token: {
-    type: String, // Token will be stored here
-  },
 });
 
+ 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
