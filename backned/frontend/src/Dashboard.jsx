@@ -58,18 +58,21 @@ const Dashboard = () => {
 
   const handleLogoutClick = async () => {
     try {
-      // Sending a logout request to the backend to clear the session
+      const userConfirmed = window.confirm('Are you sure you want to logout?');
+  
+      if (!userConfirmed) {
+        return;
+      }
+  
+      // Proceed with logout
       await axios.post('http://localhost:3000/api/auth/logout');
-      
-      // Remove the authentication cookie (assuming the cookie's name is 'token')
       Cookies.remove('token');
-      
-      // Navigate to the login page
       navigate('/');
     } catch (error) {
       console.error('Error logging out:', error);
     }
   };
+  
   
 
   // Data fetching and logic for attendance goes here
@@ -100,7 +103,7 @@ const Dashboard = () => {
 
      const calculateTopAttendees = (data) => {
       if (data.length > 0) {
-        const students = data[0].students; // Access the students array from the first report
+        const students = data[0].students;
 
         let presentCount = 0;
         let absentCount = 0;

@@ -1,34 +1,38 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignInSignUp from './SignInSignUp';
 import Dashboard from './Dashboard';
 import TeacherDashboard from './TeacherDashboard';
 import AssignmentManager from './AssignmentManager';
 import StudentDashboard from './StudentDashboard';
 import Scan from './components/scan';
-import './App.css'; 
+import './App.css';
 import './index.css';
 
-// Use BrowserRouter and pass the future flag for React Router v7
+// Define the routes and enable future flags
+const router = createBrowserRouter(
+  [
+    { path: '/', element: <SignInSignUp /> },
+    { path: '/dashboard', element: <Dashboard /> },
+    { path: '/scan', element: <Scan /> },
+    { path: '/TeacherDashboard', element: <TeacherDashboard /> },
+    { path: '/AssignmentManager', element: <AssignmentManager /> },
+    { path: '/StudentDashboard', element: <StudentDashboard /> },
+  ],
+  {
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+      v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
+      v7_skipActionErrorRevalidation: true,
+    },
+  }
+);
+
 function App() {
-  return (
-    <Router 
-      future={{
-        v7_relativeSplatPath: true,  // Opt-in to relative splat path resolution in v7
-      }}
-    >
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<SignInSignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/scan" element={<Scan />} />
-          <Route path="/TeacherDashboard" element={<TeacherDashboard />} />
-          <Route path="/AssignmentManager" element={<AssignmentManager />} />
-          <Route path="/StudentDashboard" element={<StudentDashboard />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

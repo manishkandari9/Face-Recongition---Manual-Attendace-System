@@ -22,8 +22,6 @@ connectDB();
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:5173',
-     // Local development URL
-    'https://face-recongition-manual-attendace-system.vercel.app', // Vercel production URL
 ];
 
 
