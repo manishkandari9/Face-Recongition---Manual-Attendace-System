@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('./User'); // Import your User model
+const User = require('../models/User');
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -9,12 +9,9 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: 'Access denied. No token provided.' });
     }
 
-    // Verify token
-    const decoded = jwt.verify(token, 'your_jwt_secret');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Find the user in the database using the decoded ID
     const user = await User.findById(decoded.id);
-
     if (!user || user.token !== token) {
       return res.status(403).json({ message: 'Invalid or expired token.' });
     }

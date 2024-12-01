@@ -33,39 +33,25 @@ function SignInSignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
-
+  
     if (!validateIdentifier()) {
-      return; // Stop if validation fails
+      return;
     }
-
+  
     const endpoint = isSignIn ? 'signin' : 'signup';
     const data = { identifier, password };
+  
     try {
-      console.log("Sending request to authenticate...");
       const response = await axios.post(`http://localhost:3000/api/auth/${endpoint}`, data);
-    
-      console.log("Response received:", response);
-    
       if (response.status === 200 || response.status === 201) {
-        const token = response.data.token;
-        console.log("Authentication successful. Token received:", token);
-    
-        // Store the token in localStorage
-        localStorage.setItem('token', token);
-    
-        // Navigate to dashboard
-        console.log("Navigating to dashboard...");
+        // Token is handled server-side; no localStorage usage here.
         navigate('/dashboard');
-      } else {
-        console.log("Authentication failed. Status code:", response.status);
-        setError('Failed to authenticate. Please check your credentials.');
       }
     } catch (error) {
-      console.error("Error during authentication:", error);
       setError(error.response?.data?.message || 'Invalid credentials. Please try again.');
     }
-    
   };
+  
 
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
