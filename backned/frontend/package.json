@@ -53,5 +53,6 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
     "vite": "^5.4.11"
-  }
+  },
+   "proxy": "http://localhost:3000"
 }

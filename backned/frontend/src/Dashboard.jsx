@@ -85,21 +85,31 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAttendanceReports = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/attendance/fetch', {
-          params: { date: fetchDate, reportType: 'daily' },
-        });
+        const response = await axios.get('http://localhost:3000/api/attendance');
+        
+        // Check the content type of the response
+        const contentType = response.headers['content-type'];
 
-        console.log("API Response:", JSON.stringify(response.data, null, 2)); 
-        calculateTopAttendees(response.data);  
-      } catch (error) {
-        console.error('Error fetching attendance reports:', error);
-        if (error.response) {
-          setErrorMessage(`Error: ${error.response.data.message || error.message}`);
+        if (contentType && contentType.includes('application/json')) {
+          // If the response is in JSON format
+          if (response.data && Array.isArray(response.data)) {
+            calculateTopAttendees(response.data);
+          } else {
+            console.error("Invalid attendance data:", response.data);
+            setErrorMessage("Failed to fetch attendance data. Please try again.");
+          }
         } else {
-          setErrorMessage('Failed to fetch attendance reports. Please try again.');
+          console.error("Unexpected response format:", contentType);
+          setErrorMessage("Unexpected response format. Please try again.");
         }
+      } catch (error) {
+        console.error("Error fetching attendance reports:", error);
+        setErrorMessage("Failed to fetch attendance data. Please try again.");
       }
     };
+
+   
+
 
      const calculateTopAttendees = (data) => {
       if (data.length > 0) {

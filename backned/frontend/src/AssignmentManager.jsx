@@ -41,18 +41,23 @@ function AssignmentManager() {
 
   // Fetch assignments from the backend
   const fetchAssignments = async () => {
-    setMessage("Fetching assignments..."); // Set fetching message
-    setLoading(true); // Start loading
+    setMessage("Fetching assignments...");
+    setLoading(true);
     try {
       const response = await axios.get("http://localhost:3000/api/assignments");
-      setAssignments(response.data);
-      setMessage("Assignments fetched successfully!");
+      if (Array.isArray(response.data)) {
+        setAssignments(response.data);
+        setMessage("Assignments fetched successfully!");
+      } else {
+        setAssignments([]);  // If not an array, set empty array
+        setMessage("Error: Received invalid data.");
+      }
     } catch (error) {
       setMessage("Error fetching assignments: " + (error.response?.data?.message || error.message));
       console.error("Error fetching assignments:", error);
     } finally {
-      setLoading(false); // Stop loading
-      setTimeout(() => setMessage(""), 3000); // Hide message after 3 seconds
+      setLoading(false);
+      setTimeout(() => setMessage(""), 3000);
     }
   };
 

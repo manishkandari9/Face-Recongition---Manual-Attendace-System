@@ -101,15 +101,25 @@ const TeacherDashboard = () => {
 
 
 
-    const fetchStudents = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/students');
-        setThirdYearStudents(response.data);
-      } catch (error) {
-        console.error("Error fetching students:", error);
-        setErrorMessage("Failed to fetch students. Please try again.");
-      }
-    };
+   const fetchStudents = async () => {
+  try {
+    // Make the GET request to the API
+    const response = await axios.get('http://localhost:3000/api/students');
+    
+    // Check if the response data is an array (to avoid errors when calling .filter or other array methods)
+    if (Array.isArray(response.data)) {
+      setThirdYearStudents(response.data); // Set the students data
+    } else {
+      console.error("Unexpected data format:", response.data);
+      setErrorMessage("Unexpected response format. Please try again.");
+    }
+  } catch (error) {
+    // Handle errors (network errors, etc.)
+    console.error("Error fetching students:", error);
+    setErrorMessage("Failed to fetch students. Please try again.");
+  }
+};
+
 
     const addNewStudent = async () => {
       // Check karo ki student ka name aur roll number diya gaya hai ya nahi
@@ -178,7 +188,9 @@ const TeacherDashboard = () => {
     fetchStudents();
   }, []);
 
+  console.log(Array.isArray(thirdYearStudents));
   const totalAbsentStudents = thirdYearStudents.filter(student => student.status === 'absent').length;
+  
   const totalStudents = thirdYearStudents.length;
   const totalPresentStudents = thirdYearStudents.filter(student => student.status === 'present').length;
   const absentPercentage = totalStudents > 0 ? (totalAbsentStudents / totalStudents * 100).toFixed(2) : 0;
@@ -220,9 +232,9 @@ const TeacherDashboard = () => {
   }, [date]);
 
   // New function to fetch attendance reports
-  const fetchAttendanceReports = async () => {
+  const fetchAttendanceReports = async () => {``
     try {
-      const response = await axios.get(`http://localhost:3000/api/attendance/fetch`, {
+      const response = await axios.get(`/api/attendance/fetch`, {
         params: { date: fetchDate, reportType },
       });
       setAttendanceReports(response.data);
