@@ -10,6 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Cookies from 'js-cookie';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const attendanceData = [
@@ -55,13 +56,21 @@ const Dashboard = () => {
     navigate("/dashboard");
   };
 
-  const handleLogoutClick = () => {
-    const confirmLogout = window.confirm("Are you sure you want to logout?");
-    if (confirmLogout) {
-      localStorage.removeItem('authToken');
-      navigate('/'); // Redirect to login page
+  const handleLogoutClick = async () => {
+    try {
+      // Sending a logout request to the backend to clear the session
+      await axios.post('http://localhost:3000/api/auth/logout');
+      
+      // Remove the authentication cookie (assuming the cookie's name is 'token')
+      Cookies.remove('token');
+      
+      // Navigate to the login page
+      navigate('/');
+    } catch (error) {
+      console.error('Error logging out:', error);
     }
   };
+  
 
   // Data fetching and logic for attendance goes here
   const [topAttendees, setTopAttendees] = useState([]);

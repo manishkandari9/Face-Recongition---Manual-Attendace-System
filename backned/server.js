@@ -7,8 +7,11 @@ const studentRoutes = require('./routes/studentRoutes');
 const path = require('path');
 const cors = require('cors'); // Import the CORS middleware
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const app = express();
+
+app.use(cookieParser());
 
 // Connect to the database
 connectDB();

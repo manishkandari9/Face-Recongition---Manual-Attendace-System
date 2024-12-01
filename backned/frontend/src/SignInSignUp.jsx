@@ -33,24 +33,27 @@ function SignInSignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
-  
+
     if (!validateIdentifier()) {
       return;
     }
-  
+
     const endpoint = isSignIn ? 'signin' : 'signup';
     const data = { identifier, password };
-  
+
     try {
       const response = await axios.post(`http://localhost:3000/api/auth/${endpoint}`, data);
+      console.log(response); // Log the response to debug
       if (response.status === 200 || response.status === 201) {
         // Token is handled server-side; no localStorage usage here.
         navigate('/dashboard');
       }
     } catch (error) {
+      console.error('Error during signin/signup:', error); // Log the error for debugging
       setError(error.response?.data?.message || 'Invalid credentials. Please try again.');
     }
   };
+
   
 
   useEffect(() => {
