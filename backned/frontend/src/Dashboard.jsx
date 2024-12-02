@@ -85,43 +85,29 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAttendanceReports = async () => {
       try {
-        // Axios GET request to fetch data
         const response = await axios.get('http://localhost:3000/api/attendance');
-    
+        
         // Check the content type of the response
         const contentType = response.headers['content-type'];
-    
-        // Validate if the response is in JSON format
+
         if (contentType && contentType.includes('application/json')) {
-          // Check if the response data is an array
-          if (Array.isArray(response.data)) {
+          // If the response is in JSON format
+          if (response.data && Array.isArray(response.data)) {
             calculateTopAttendees(response.data);
           } else {
             console.error("Invalid attendance data:", response.data);
-            setErrorMessage("Failed to fetch valid attendance data. Please try again.");
+            setErrorMessage("Failed to fetch attendance data. Please try again.");
           }
         } else {
           console.error("Unexpected response format:", contentType);
           setErrorMessage("Unexpected response format. Please try again.");
         }
       } catch (error) {
-        // Handle network errors or any other errors
         console.error("Error fetching attendance reports:", error);
-    
-        // Differentiate between network errors and other API errors
-        if (error.response) {
-          // Server responded with a status code outside 2xx range
-          setErrorMessage(`Server Error: ${error.response.status}. Please try again.`);
-        } else if (error.request) {
-          // No response received from server
-          setErrorMessage("Network Error: Please check your connection.");
-        } else {
-          // Any other error
-          setErrorMessage("An unexpected error occurred. Please try again.");
-        }
+        setErrorMessage("Failed to fetch attendance data. Please try again.");
       }
     };
-    
+
    
 
 

@@ -1,22 +1,19 @@
 const TotalStudent = require('../models/TotalStudent');
 
- 
+// Controller to create a new student
 exports.createStudent = async (req, res) => {
   const { name, rollNumber } = req.body;
 
- 
   if (!name || !rollNumber) {
     return res.status(400).json({ message: 'Name and roll number are required.' });
   }
 
   try {
-    
     const existingStudent = await TotalStudent.findOne({ rollNumber });
     if (existingStudent) {
       return res.status(400).json({ message: 'Roll number already exists.' });
     }
 
- 
     const newStudent = new TotalStudent({ name, rollNumber });
     const savedStudent = await newStudent.save();
 
@@ -27,7 +24,7 @@ exports.createStudent = async (req, res) => {
   }
 };
 
-// Controller for getting all students
+// Controller to get all students
 exports.getAllStudents = async (req, res) => {
   try {
     const students = await TotalStudent.find();
@@ -38,7 +35,7 @@ exports.getAllStudents = async (req, res) => {
   }
 };
 
- 
+// Controller to delete a student by roll number
 exports.deleteStudent = async (req, res) => {
   const { rollNumber } = req.params;
 
