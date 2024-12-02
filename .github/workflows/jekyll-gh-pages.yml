@@ -49,3 +49,13 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+
+        # Existing _config.yml content...
+        exclude:
+         - node_modules
+         - Gemfile
+         - Gemfile.lock
+         - vendor/bundle
+         - README.md
+
