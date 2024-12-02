@@ -16,14 +16,33 @@ router.post('/', async (req, res) => {
 });
 
  
+const moment = require('moment'); // Make sure to install moment for date handling
+
 router.get('/fetch', async (req, res) => {
   const { date } = req.query;  
 
+  if (!date) {
+    return res.status(400).json({ message: 'Date parameter is required' });
+  }
+
   try {
-    const attendanceData = await Attendance.find({ date: new Date(date) });
+    // Use moment to handle date correctly and match the whole day range
+    const startDate = moment(date).startOf('day').toDate();
+    const endDate = moment(date).endOf('day').toDate();
+
+    // Query to fetch attendance data for the given date range
+    const attendanceData = await Attendance.find({
+      date: {
+        $gte: startDate, // greater than or equal to the start of the day
+        $lte: endDate,   // less than or equal to the end of the day
+      },
+    });
+
+    // Return the data in JSON format
     res.status(200).json(attendanceData);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching attendance data', error });
+    // Return error response with details
+    res.status(500).json({ message: 'Error fetching attendance data', error: error.message });
   }
 });
 

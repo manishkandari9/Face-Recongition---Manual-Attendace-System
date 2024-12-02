@@ -13,9 +13,10 @@ const app = express();
 
 app.use(cookieParser());
 
+app.use(cors());
+
 // Connect to the database
 connectDB();
-app.use(cors());
 
 
 //.................... code for deployment.................

@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 import TeacherDashboard from './TeacherDashboard';
 import AssignmentManager from './AssignmentManager';
 import StudentDashboard from './StudentDashboard';
-import Scan from './components/scan';
+// import Scan from './components/scan';
 import './App.css';
 import './index.css';
 
@@ -14,7 +14,7 @@ const router = createBrowserRouter(
   [
     { path: '/', element: <SignInSignUp /> },
     { path: '/dashboard', element: <Dashboard /> },
-    { path: '/scan', element: <Scan /> },
+    // { path: '/scan', element: <Scan /> },
     { path: '/TeacherDashboard', element: <TeacherDashboard /> },
     { path: '/AssignmentManager', element: <AssignmentManager /> },
     { path: '/StudentDashboard', element: <StudentDashboard /> },

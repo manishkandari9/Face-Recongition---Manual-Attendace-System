@@ -231,19 +231,22 @@ const TeacherDashboard = () => {
   }, [date]);
 
   // New function to fetch attendance reports
-  const fetchAttendanceReports = async () => {``
+  const fetchAttendanceReports = async () => {
     try {
       const response = await axios.get(`/api/attendance/fetch`, {
         params: { date: fetchDate, reportType },
       });
+      console.log("Response data:", response.data); // This should be a JSON array or object, not HTML
       setAttendanceReports(response.data);
-      calculateAttendance(response.data);  
+      calculateAttendance(response.data);
       setFetchDate(''); // Clear the fetch date after fetching
     } catch (error) {
       console.error("Error fetching attendance reports:", error);
       setErrorMessage('Failed to fetch attendance reports. Please try again.');
     }
   };
+  
+  
   
   const calculateAttendance = (data) => {
     if (data.length > 0) {
