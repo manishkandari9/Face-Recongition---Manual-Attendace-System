@@ -106,7 +106,6 @@ const TeacherDashboard = () => {
     // Make the GET request to the API
     const response = await axios.get('http://localhost:3000/api/students');
     
-    // Check if the response data is an array (to avoid errors when calling .filter or other array methods)
     if (Array.isArray(response.data)) {
       setThirdYearStudents(response.data); // Set the students data
     } else {
