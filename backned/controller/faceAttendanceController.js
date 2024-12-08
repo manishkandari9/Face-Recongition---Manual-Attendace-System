@@ -1,5 +1,5 @@
-const { FaceStudent } = require('../models/faceStudentModel'); // FaceStudent मॉडल इम्पोर्ट करें
-const { FaceAttendance } = require('../models/faceAttendanceModel'); // FaceAttendance मॉडल इम्पोर्ट करें
+const { FaceStudent } = require('../models/faceStudentModel'); 
+const { FaceAttendance } = require('../models/faceAttendanceModel'); 
 const faceapi = require('face-api.js');
 
 
