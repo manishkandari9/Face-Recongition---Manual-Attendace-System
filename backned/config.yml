@@ -4,3 +4,10 @@ exclude:
   - Gemfile.lock
   - vendor/bundle
   - README.md
+  - .env
+  - backned
+  - frontend
+  - controller
+  - middleware
+  - models
+  - routes
