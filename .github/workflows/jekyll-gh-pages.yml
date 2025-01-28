@@ -1,4 +1,3 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
@@ -52,12 +51,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-# Exclude unwanted files/folders in Jekyll
-exclude:
-  - node_modules
-  - Gemfile
-  - Gemfile.lock
-  - vendor/bundle
-  - README.md
-
