@@ -1,0 +1,67 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - vite    # `vite` branch ke liye workflow trigger hoga
+      - release/*
+  schedule:
+    - cron: "0 2 * * 1-5"  # This will run every Monday to Friday at 2:00 AM UTC
+  workflow_dispatch:
+
+jobs:
+  my_job:
+    name: Deploy to Staging
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install Dependencies
+        run: npm install
+
+      # Deploy step (you can add your own deployment command here)
+      - name: Deploy
+        run: npm run deploy  # replace with your deploy command
+
+  test:
+    name: Test on Node and OS
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ['18.x', '20.x']
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install, Build and Test
+        run: |
+          npm install
+          npm run build --if-present
+          npm test
+
+  publish:
+    name: Publish on Push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'  # Only run if event is 'push'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Assuming you have stored your NPM token in GitHub secrets
