@@ -1,0 +1,8 @@
+# _config.yml
+
+exclude:
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - vendor/bundle
+  - README.md
